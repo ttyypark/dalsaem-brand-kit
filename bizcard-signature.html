@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>달샘 명함 · 메일서명</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --ds-primary:  #2D3A5F;
+    --ds-bg:       #F9F7F2;
+    --ds-surface:  #F0EDE5;
+    --ds-text:     #1C1C1C;
+    --ds-text-sub: #6E6B65;
+    --ds-accent:   #B8924A;
+    --ds-line:     #DDD9D0;
+    --ds-font-h:   'Noto Serif KR', Georgia, serif;
+    --ds-font-b:   'Pretendard', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #D6D3CD;
+    font-family: var(--ds-font-b);
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  /* 섹션 헤더 */
+  .section-header {
+    align-self: flex-start;
+    max-width: 700px;
+    width: 100%;
+  }
+  .section-header .section-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ds-accent);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .section-header h2 {
+    font-family: var(--ds-font-h);
+    font-size: 20px;
+    color: var(--ds-primary);
+  }
+  .section-header .hint {
+    font-size: 11px;
+    color: #888;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  /* ──────────────────────────────
+     명함 앞면
+  ────────────────────────────── */
+  .card-pair {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .bizcard {
+    width: 400px;
+    height: 240px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 앞면 */
+  .bizcard-front {
+    background: var(--ds-bg);
+    border: 1px solid var(--ds-line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 36px;
+  }
+  .bizcard-front::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--ds-accent);
+  }
+
+  .bizcard-front .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .bizcard-front .name-block .name {
+    font-family: var(--ds-font-h);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ds-primary);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .bizcard-front .name-block .title {
+    font-size: 11px;
+    color: var(--ds-text-sub);
+    letter-spacing: 0.5px;
+  }
+  .bizcard-front .moon-mark {
+    opacity: 0.9;
+  }
+
+  .bizcard-front .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .bizcard-front .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .bizcard-front .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10.5px;
+    color: var(--ds-text-sub);
+  }
+  .bizcard-front .contact-row .dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--ds-accent);
+    flex-shrink: 0;
+  }
+
+  .bizcard-front .brand-block {
+    text-align: right;
+  }
+  .bizcard-front .brand-block .brand-name {
+    font-family: var(--ds-font-h);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ds-primary);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .bizcard-front .brand-block .slogan {
+    font-family: var(--ds-font-h);
+    font-size: 8.5px;
+    color: var(--ds-accent);
+    letter-spacing: 0.5px;
+  }
+
+  /* 뒷면 */
+  .bizcard-back {
+    background: var(--ds-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+  }
+  .bizcard-back .brand-name-lg {
+    font-family: var(--ds-font-h);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ds-bg);
+    letter-spacing: 6px;
+  }
+  .bizcard-back .divider {
+    width: 32px;
+    height: 1.5px;
+    background: var(--ds-accent);
+  }
+  .bizcard-back .slogan {
+    font-family: var(--ds-font-h);
+    font-size: 11px;
+    color: var(--ds-accent);
+    letter-spacing: 1px;
+  }
+  .bizcard-back .deco {
+    position: absolute;
+    right: -20px; bottom: -20px;
+    opacity: 0.07;
+  }
+
+  /* ──────────────────────────────
+     메일 서명
+  ────────────────────────────── */
+  .signature-wrap {
+    width: 600px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 32px 36px;
+  }
+  .signature-wrap .preview-label {
+    font-size: 10px;
+    color: #bbb;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  /* 서명 실제 영역 (복붙용) */
+  .sig {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    border-top: 2.5px solid #2D3A5F;
+    padding-top: 18px;
+  }
+  .sig-inner {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+  }
+  .sig-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 20px;
+    border-right: 1px solid #DDD9D0;
+    gap: 6px;
+    min-width: 130px;
+  }
+  .sig-left .sig-brand {
+    font-family: 'Noto Serif KR', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #2D3A5F;
+    letter-spacing: 2px;
+  }
+  .sig-left .sig-slogan {
+    font-family: 'Noto Serif KR', Georgia, serif;
+    font-size: 9px;
+    color: #B8924A;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+  }
+  .sig-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding-left: 4px;
+  }
+  .sig-right .sig-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1C1C1C;
+  }
+  .sig-right .sig-title {
+    font-size: 11px;
+    color: #6E6B65;
+    margin-bottom: 4px;
+  }
+  .sig-right .sig-contact {
+    font-size: 11px;
+    color: #6E6B65;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sig-right .sig-contact .dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: #B8924A;
+    display: inline-block;
+  }
+
+  /* 복붙 코드 박스 */
+  .code-box {
+    margin-top: 24px;
+    background: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .code-box .code-label {
+    font-size: 10px;
+    color: #999;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .code-box pre {
+    font-size: 10.5px;
+    color: #444;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: 'Consolas', 'Monaco', monospace;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── 명함 섹션 ── -->
+<div class="section-header">
+  <span class="section-tag">Business Card</span>
+  <h2>명함</h2>
+  <p class="hint">85×55mm 표준 비율 · 왼쪽: 앞면 / 오른쪽: 뒷면</p>
+</div>
+
+<div class="card-pair">
+
+  <!-- 앞면 -->
+  <div class="bizcard bizcard-front">
+    <div class="top">
+      <div class="name-block">
+        <p class="name">박태양</p>
+        <p class="title">지식 아카이버 · 달샘</p>
+      </div>
+      <div class="moon-mark">
+        <svg viewBox="0 0 44 44" width="40" height="40">
+          <defs>
+            <mask id="mf">
+              <circle cx="22" cy="20" r="13" fill="white"/>
+              <circle cx="28" cy="15" r="10" fill="black"/>
+            </mask>
+          </defs>
+          <circle cx="22" cy="20" r="13" fill="#2D3A5F" mask="url(#mf)"/>
+          <circle cx="16" cy="35" r="2.2" fill="#B8924A"/>
+          <circle cx="22" cy="38" r="2.2" fill="#B8924A"/>
+          <circle cx="28" cy="35" r="2.2" fill="#B8924A"/>
+        </svg>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="contact-block">
+        <div class="contact-row">
+          <div class="dot"></div>
+          <span>ttyypark@gmail.com</span>
+        </div>
+      </div>
+      <div class="brand-block">
+        <span class="brand-name">달샘</span>
+        <span class="slogan">조용한 샘에 비추는 달처럼</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 뒷면 -->
+  <div class="bizcard bizcard-back">
+    <svg class="deco" viewBox="0 0 160 160" width="160" height="160">
+      <circle cx="80" cy="80" r="70" fill="none" stroke="#F9F7F2" stroke-width="1"/>
+      <circle cx="80" cy="80" r="50" fill="none" stroke="#F9F7F2" stroke-width="1"/>
+      <circle cx="80" cy="80" r="30" fill="none" stroke="#B8924A" stroke-width="1"/>
+    </svg>
+    <p class="brand-name-lg">달샘</p>
+    <div class="divider"></div>
+    <p class="slogan">조용한 샘에 비추는 달처럼</p>
+  </div>
+
+</div>
+
+<!-- ── 메일 서명 섹션 ── -->
+<div class="section-header">
+  <span class="section-tag">Email Signature</span>
+  <h2>메일 서명</h2>
+  <p class="hint">아래 '복붙용 HTML'을 Gmail · Outlook 서명란에 붙여넣으세요.</p>
+</div>
+
+<div class="signature-wrap">
+  <span class="preview-label">Preview</span>
+
+  <!-- 서명 미리보기 -->
+  <div class="sig">
+    <div class="sig-inner">
+      <div class="sig-left">
+        <span class="sig-brand">달샘</span>
+        <span class="sig-slogan">조용한 샘에<br>비추는 달처럼</span>
+      </div>
+      <div class="sig-right">
+        <span class="sig-name">박태양</span>
+        <span class="sig-title">지식 아카이버 · 달샘</span>
+        <span class="sig-contact">
+          <span class="dot"></span>
+          ttyypark@gmail.com
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 복붙용 코드 -->
+  <div class="code-box">
+    <span class="code-label">복붙용 HTML — Gmail 서명에 붙여넣기</span>
+    <pre>&lt;table style="border-collapse:collapse;font-family:'Pretendard',-apple-system,sans-serif;"&gt;
+  &lt;tr&gt;
+    &lt;td style="border-top:2.5px solid #2D3A5F;padding-top:14px;" colspan="3"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td style="padding:8px 18px 8px 0;border-right:1px solid #DDD9D0;vertical-align:middle;"&gt;
+      &lt;div style="font-family:'Noto Serif KR',Georgia,serif;font-size:18px;font-weight:700;color:#2D3A5F;letter-spacing:2px;"&gt;달샘&lt;/div&gt;
+      &lt;div style="font-family:'Noto Serif KR',Georgia,serif;font-size:9px;color:#B8924A;margin-top:4px;line-height:1.6;"&gt;조용한 샘에&lt;br&gt;비추는 달처럼&lt;/div&gt;
+    &lt;/td&gt;
+    &lt;td style="width:14px;"&gt;&lt;/td&gt;
+    &lt;td style="padding:8px 0;vertical-align:middle;"&gt;
+      &lt;div style="font-size:14px;font-weight:600;color:#1C1C1C;margin-bottom:3px;"&gt;박태양&lt;/div&gt;
+      &lt;div style="font-size:11px;color:#6E6B65;margin-bottom:6px;"&gt;지식 아카이버 · 달샘&lt;/div&gt;
+      &lt;div style="font-size:11px;color:#6E6B65;"&gt;
+        &lt;span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:#B8924A;vertical-align:middle;margin-right:5px;"&gt;&lt;/span&gt;
+        ttyypark@gmail.com
+      &lt;/div&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+  </div>
+</div>
+
+</body>
+</html>
