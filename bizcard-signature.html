@@ -190,112 +190,94 @@
   }
 
   /* ──────────────────────────────
-     메일 서명
+     메일 서명 (레퍼런스 스타일)
   ────────────────────────────── */
-  .signature-wrap {
-    width: 600px;
-    background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 32px 36px;
+  .sig-wrap {
+    width: 720px;
+    max-width: 100%;
   }
-  .signature-wrap .preview-label {
-    font-size: 10px;
-    color: #bbb;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    display: block;
-  }
-
-  /* 서명 실제 영역 (복붙용) */
-  .sig {
-    font-family: 'Pretendard', -apple-system, sans-serif;
-    border-top: 2.5px solid #2D3A5F;
-    padding-top: 18px;
-  }
-  .sig-inner {
-    display: flex;
-    gap: 20px;
-    align-items: stretch;
-  }
-  .sig-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-right: 20px;
-    border-right: 1px solid #DDD9D0;
-    gap: 6px;
-    min-width: 130px;
-  }
-  .sig-left .sig-brand {
-    font-family: 'Noto Serif KR', Georgia, serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: #2D3A5F;
-    letter-spacing: 2px;
-  }
-  .sig-left .sig-slogan {
-    font-family: 'Noto Serif KR', Georgia, serif;
-    font-size: 9px;
-    color: #B8924A;
-    letter-spacing: 0.5px;
-    line-height: 1.6;
-  }
-  .sig-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    padding-left: 4px;
-  }
-  .sig-right .sig-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: #1C1C1C;
-  }
-  .sig-right .sig-title {
-    font-size: 11px;
-    color: #6E6B65;
-    margin-bottom: 4px;
-  }
-  .sig-right .sig-contact {
-    font-size: 11px;
-    color: #6E6B65;
+  .signature {
+    background: #FFFDF9;
+    border: 1px solid var(--ds-line);
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(45, 58, 95, 0.10);
     display: flex;
     align-items: center;
-    gap: 6px;
-  }
-  .sig-right .sig-contact .dot {
-    width: 3px; height: 3px;
-    border-radius: 50%;
-    background: #B8924A;
-    display: inline-block;
+    gap: 28px;
+    padding: 24px 32px;
   }
 
-  /* 복붙 코드 박스 */
-  .code-box {
-    margin-top: 24px;
-    background: #F5F5F5;
-    border: 1px solid #E0E0E0;
-    border-radius: 6px;
-    padding: 16px 18px;
+  /* 좌측 로고 락업 */
+  .signature .sig-logo {
+    flex: none;
+    text-align: center;
   }
-  .code-box .code-label {
-    font-size: 10px;
-    color: #999;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    display: block;
+  .signature .sig-logo .lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
   }
-  .code-box pre {
-    font-size: 10.5px;
-    color: #444;
-    line-height: 1.65;
-    white-space: pre-wrap;
-    word-break: break-all;
-    font-family: 'Consolas', 'Monaco', monospace;
+  .signature .sig-logo .lockup b {
+    font-family: var(--ds-font-h);
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--ds-primary);
+    letter-spacing: 2px;
+  }
+  .signature .sig-logo .sig-slogan {
+    font-family: var(--ds-font-h);
+    font-size: 11px;
+    color: var(--ds-text-sub);
+    margin-top: 7px;
+    letter-spacing: 0.3px;
+  }
+
+  /* 세로 구분선 */
+  .signature .divider {
+    width: 1px;
+    align-self: stretch;
+    background: var(--ds-line);
+    flex: none;
+  }
+
+  /* 우측 본문 */
+  .signature .sig-body { min-width: 0; }
+  .signature .sig-name {
+    font-family: var(--ds-font-h);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ds-primary);
+  }
+  .signature .sig-name .role {
+    font-family: var(--ds-font-b);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ds-text-sub);
+    margin-left: 8px;
+  }
+  .signature .sig-brand {
+    font-size: 12.5px;
+    color: var(--ds-text-sub);
+    margin-top: 4px;
+  }
+  .signature .sig-brand b {
+    color: var(--ds-text);
+    font-weight: 700;
+  }
+  .signature .sig-links {
+    font-size: 12.5px;
+    margin-top: 10px;
+    color: var(--ds-text-sub);
+  }
+  .signature .sig-links a {
+    color: var(--ds-primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .signature .sig-links a.mail { color: var(--ds-accent); } /* 달빛 골드 포인트 한 곳 */
+  .signature .sig-links .dot {
+    color: var(--ds-line);
+    margin: 0 8px;
   }
 </style>
 </head>
@@ -364,53 +346,47 @@
 <div class="section-header">
   <span class="section-tag">Email Signature</span>
   <h2>메일 서명</h2>
-  <p class="hint">아래 '복붙용 HTML'을 Gmail · Outlook 서명란에 붙여넣으세요.</p>
+  <p class="hint">이름 · 연락처는 데모용 가상 정보입니다 · 브랜드 가이드 적용 예시</p>
 </div>
 
-<div class="signature-wrap">
-  <span class="preview-label">Preview</span>
-
-  <!-- 서명 미리보기 -->
-  <div class="sig">
-    <div class="sig-inner">
-      <div class="sig-left">
-        <span class="sig-brand">달샘</span>
-        <span class="sig-slogan">조용한 샘에<br>비추는 달처럼</span>
+<div class="sig-wrap">
+  <div class="signature">
+    <!-- 좌측 로고 락업 -->
+    <div class="sig-logo">
+      <div class="lockup">
+        <svg viewBox="0 0 44 44" width="26" height="26" aria-label="달샘">
+          <defs>
+            <mask id="sig-moon">
+              <circle cx="22" cy="20" r="13" fill="white"/>
+              <circle cx="28" cy="15" r="10" fill="black"/>
+            </mask>
+          </defs>
+          <circle cx="22" cy="20" r="13" fill="#2D3A5F" mask="url(#sig-moon)"/>
+          <circle cx="16" cy="35" r="2.2" fill="#B8924A"/>
+          <circle cx="22" cy="38" r="2.2" fill="#B8924A"/>
+          <circle cx="28" cy="35" r="2.2" fill="#B8924A"/>
+        </svg>
+        <b>달샘</b>
       </div>
-      <div class="sig-right">
-        <span class="sig-name">박태양</span>
-        <span class="sig-title">지식 아카이버 · 달샘</span>
-        <span class="sig-contact">
-          <span class="dot"></span>
-          ttyypark@gmail.com
-        </span>
+      <div class="sig-slogan">조용한 샘에 비추는 달처럼</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 우측 본문 -->
+    <div class="sig-body">
+      <div class="sig-name">박태양<span class="role">지식 아카이버 / Archivist</span></div>
+      <div class="sig-brand"><b>달샘</b> · 조용한 샘에 비추는 달처럼.</div>
+      <div class="sig-links">
+        <a class="mail" href="mailto:ttyypark@gmail.com">ttyypark@gmail.com</a>
+        <span class="dot">·</span>
+        <a href="https://dalsaem.kr">dalsaem.kr</a>
+        <span class="dot">·</span>
+        <a href="#">@dalsaem.note</a>
+        <span class="dot">·</span>
+        010-0000-0000
       </div>
     </div>
-  </div>
-
-  <!-- 복붙용 코드 -->
-  <div class="code-box">
-    <span class="code-label">복붙용 HTML — Gmail 서명에 붙여넣기</span>
-    <pre>&lt;table style="border-collapse:collapse;font-family:'Pretendard',-apple-system,sans-serif;"&gt;
-  &lt;tr&gt;
-    &lt;td style="border-top:2.5px solid #2D3A5F;padding-top:14px;" colspan="3"&gt;&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td style="padding:8px 18px 8px 0;border-right:1px solid #DDD9D0;vertical-align:middle;"&gt;
-      &lt;div style="font-family:'Noto Serif KR',Georgia,serif;font-size:18px;font-weight:700;color:#2D3A5F;letter-spacing:2px;"&gt;달샘&lt;/div&gt;
-      &lt;div style="font-family:'Noto Serif KR',Georgia,serif;font-size:9px;color:#B8924A;margin-top:4px;line-height:1.6;"&gt;조용한 샘에&lt;br&gt;비추는 달처럼&lt;/div&gt;
-    &lt;/td&gt;
-    &lt;td style="width:14px;"&gt;&lt;/td&gt;
-    &lt;td style="padding:8px 0;vertical-align:middle;"&gt;
-      &lt;div style="font-size:14px;font-weight:600;color:#1C1C1C;margin-bottom:3px;"&gt;박태양&lt;/div&gt;
-      &lt;div style="font-size:11px;color:#6E6B65;margin-bottom:6px;"&gt;지식 아카이버 · 달샘&lt;/div&gt;
-      &lt;div style="font-size:11px;color:#6E6B65;"&gt;
-        &lt;span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:#B8924A;vertical-align:middle;margin-right:5px;"&gt;&lt;/span&gt;
-        ttyypark@gmail.com
-      &lt;/div&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;</pre>
   </div>
 </div>
 
