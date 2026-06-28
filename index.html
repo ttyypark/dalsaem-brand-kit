@@ -71,6 +71,8 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ds-primary); }
+  /* 현재 보고 있는 섹션 표시 — 골드로 살짝 구분 */
+  .nav-links a.active { color: var(--ds-accent); font-weight: 600; }
 
   /* ── HERO ── */
   #hero {
@@ -142,6 +144,62 @@
     transition: gap 0.25s, color 0.25s;
   }
   .hero-cta:hover { gap: 16px; color: var(--ds-accent); }
+
+  /* 히어로 — 산출물 바로가기 3카드 */
+  .hero-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 660px;
+    margin-top: 8px;
+  }
+  .hero-card {
+    background: rgba(240, 237, 229, 0.55);
+    border: 1px solid var(--ds-line);
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-decoration: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.25s, border-color 0.25s, background 0.25s;
+  }
+  .hero-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--ds-accent);
+    background: var(--ds-surface);
+  }
+  .hero-card .hc-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ds-accent);
+    font-weight: 600;
+  }
+  .hero-card h3 {
+    font-family: var(--ds-font-h);
+    font-size: 16px;
+    color: var(--ds-primary);
+    line-height: 1.4;
+  }
+  .hero-card .hc-desc {
+    font-size: 12px;
+    color: var(--ds-text-sub);
+    line-height: 1.6;
+  }
+  .hero-card .hc-go {
+    margin-top: 4px;
+    font-family: var(--ds-font-h);
+    font-size: 13px;
+    color: var(--ds-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.25s, color 0.25s;
+  }
+  .hero-card:hover .hc-go { gap: 12px; color: var(--ds-accent); }
 
   /* 스크롤 힌트 */
   .scroll-hint {
@@ -446,6 +504,7 @@
   }
   .mobile-menu a:last-child { border-bottom: none; }
   .mobile-menu a:hover { color: var(--ds-accent); }
+  .mobile-menu a.active { color: var(--ds-accent); }
 
   /* ── 반응형 ── */
   @media (max-width: 720px) {
@@ -455,6 +514,7 @@
     .mobile-menu { display: flex; }
     .about-grid { grid-template-columns: 1fr; gap: 32px; }
     .foryou-grid { grid-template-columns: 1fr; }
+    .hero-cards { grid-template-columns: 1fr; max-width: 360px; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
     #story .story-quote { padding: 0 16px; }
   }
@@ -522,7 +582,20 @@
   <h1>달샘</h1>
   <p class="slogan">조용한 샘에 비추는 달처럼</p>
   <p class="sub">복잡한 머릿속을 고요하게 정리하는<br>나만의 감성 지식 아카이브</p>
-  <a href="#about" class="hero-cta">더 알아보기 →</a>
+  <div class="hero-cards">
+    <a href="ppt.html" class="hero-card">
+      <h3>회사소개 PPT</h3>
+      <p class="hc-desc">달샘을 한눈에 소개하는 슬라이드</p>
+    </a>
+    <a href="cardnews.html" class="hero-card">
+      <h3>SNS 카드뉴스</h3>
+      <p class="hc-desc">한 장씩 넘겨 보는 브랜드 이야기</p>
+    </a>
+    <a href="bizcard-signature.html" class="hero-card">
+      <h3>명함 &amp; 메일 서명</h3>
+      <p class="hc-desc">달샘 명함과 메일 하단 서명</p>
+    </a>
+  </div>
 
   <div class="scroll-hint">
     <span>Scroll</span>
@@ -657,6 +730,25 @@
     mobileMenu.classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  // 스크롤 위치에 따라 현재 섹션 nav 강조 (스크롤 스파이)
+  const navMap = {};
+  document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
+    const href = a.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const id = href.slice(1);
+      (navMap[id] = navMap[id] || []).push(a);
+    }
+  });
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      document.querySelectorAll('.nav-links a.active, .mobile-menu a.active')
+        .forEach(a => a.classList.remove('active'));
+      (navMap[e.target.id] || []).forEach(a => a.classList.add('active'));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => spy.observe(s));
 </script>
 
 </body>
