@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "kr.dalsaem.app",
+      "sha256_cert_fingerprints": [
+        "5C:4B:FE:A3:E3:43:BA:99:73:00:37:11:A1:B5:E0:04:7C:69:D5:0F:42:08:88:81:EC:AB:87:01:4B:B6:98:62"
+      ]
+    }
+  }
+]
