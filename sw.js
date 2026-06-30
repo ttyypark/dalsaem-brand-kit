@@ -1,12 +1,14 @@
-const CACHE_NAME = 'dalsaem-v1';
+const CACHE_NAME = 'dalsaem-v2';
 const ASSETS = [
   '/',
   '/index.html',
   '/ppt.html',
   '/cardnews.html',
   '/bizcard-signature.html',
-  '/icons/icon-192.svg',
-  '/icons/icon-512.svg',
+  '/manifest.json',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/icon-512-maskable.png',
   '/brand-dalsaem/mark.svg'
 ];
 

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <mask id="moon">
+      <circle cx="256" cy="196" r="112" fill="white"/>
+      <circle cx="310" cy="152" r="90" fill="black"/>
+    </mask>
+  </defs>
+  <!-- 전체를 채우는 배경 (maskable: 둥근/원형 마스크에도 빈 모서리 없음) -->
+  <rect width="512" height="512" fill="#2D3A5F"/>
+  <!-- 핵심 그래픽은 세이프존(중앙 80%) 안으로 살짝 축소 -->
+  <g transform="translate(256 248) scale(0.8) translate(-256 -248)">
+    <circle cx="256" cy="196" r="112" fill="#F9F7F2" mask="url(#moon)"/>
+    <circle cx="202" cy="372" r="18" fill="#B8924A"/>
+    <circle cx="256" cy="394" r="18" fill="#B8924A"/>
+    <circle cx="310" cy="372" r="18" fill="#B8924A"/>
+  </g>
+</svg>
